@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+*.yml
+
+D:\Documentos\Repositório\java\JobAlign\src\main\resources\application.properties
