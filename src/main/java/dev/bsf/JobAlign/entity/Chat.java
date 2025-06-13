@@ -18,6 +18,7 @@ public class Chat {
     @JsonIgnore
     private User user;
     private String content;
+    private String description;
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAT;
