@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.random.RandomGenerator;
 
 @RestController
-@RequestMapping("User")
+@RequestMapping("/User")
 public class UserController {
     @Autowired
     UserServices userServices;
@@ -24,12 +25,12 @@ public class UserController {
         return ResponseEntity.ok(userServices.listAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<User> listById(@PathVariable String id){
+    public ResponseEntity<User> listById(@PathVariable UUID id){
         return ResponseEntity.ok(userServices.listById(id).orElseThrow(() -> new RuntimeException("User Not Found")));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable String id, @RequestBody User user){
+    public ResponseEntity<User> update(@PathVariable UUID id, @RequestBody User user){
 
         return userServices.listById(id)
                 .map(userExists -> {
@@ -40,8 +41,9 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable String id){
+    public ResponseEntity<String> delete(@PathVariable UUID id){
         userServices.deleteById(id);
-        return ResponseEntity.ok("User has deleted");
+        return ResponseEntity.ok("User has deleted")
+                ;
     }
 }
